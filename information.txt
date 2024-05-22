@@ -1,0 +1,9 @@
+information
+be able to save the passwords, and the platform. 
+create or suggest strong passwords.
+unlimited number if passwords
+Strength Analysis: Analyze the strength of stored passwords.
+Breach Monitoring: Notify users if their passwords are found in known data breaches.
+Password Reuse Alerts: Alert users when they reuse passwords across multiple sites.
+Password Sharing: Securely share passwords with trusted contacts.
+Emergency Access: Provide trusted contacts with emergency access to the account in case of an emergency.
