@@ -6,4 +6,6 @@ Strength Analysis: Analyze the strength of stored passwords.
 Breach Monitoring: Notify users if their passwords are found in known data breaches.
 Password Reuse Alerts: Alert users when they reuse passwords across multiple sites.
 Password Sharing: Securely share passwords with trusted contacts.
+encrypt passwords
 Emergency Access: Provide trusted contacts with emergency access to the account in case of an emergency.
+store passowrds
