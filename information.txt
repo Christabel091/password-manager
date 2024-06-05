@@ -9,3 +9,5 @@ Password Sharing: Securely share passwords with trusted contacts.
 encrypt passwords
 Emergency Access: Provide trusted contacts with emergency access to the account in case of an emergency.
 store passowrds
+
+
