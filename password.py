@@ -1,7 +1,6 @@
 import mysql.connector
 from mysql.connector import Error
 import bcrypt # type: ignore
-import getpass
 
 # Function to connect to the MySQL database
 def create_connection():
