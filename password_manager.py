@@ -1,5 +1,5 @@
 from user import User
-from password import create_connection, authenticate_user, create_user
+from sqldata import create_connection, authenticate_user, create_user
 import getpass
 
 def main():
