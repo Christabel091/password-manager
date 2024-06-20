@@ -10,6 +10,6 @@ Password Reuse Alerts: Alert users when they reuse passwords across multiple sit
 Password Sharing: Securely share passwords with trusted contacts. todo
 encrypt passwords  todo
 Emergency Access: Provide trusted contacts with emergency access to the account in case of an emergency. todo
-store passowrds in database MYSQL todo
+store passowrds in database MYSQL done
 
 
