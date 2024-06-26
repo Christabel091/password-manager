@@ -28,9 +28,9 @@ def main():
         authenticate_user(connection, username, password)
 
     print("You have successfully logged in")
+    print("\n Welcome again " + user_name)
+    print(user_name + "So, What can we do for you today!!")
     while True:
-        print("\n Welcome " + user_name)
-        print(user_name + "What can we do for you today!!")
         print("1. Save Password")
         print("2. Create or Suggest Password")
         print("3. Analyze Password")#modify these to analyze passwords better or the ones about to be stored
@@ -48,10 +48,10 @@ def main():
                 print("Password is not valid.")
                 continue
             print("checking to see if reused")
-            reused = user.password_used(password)
+            reused = user.password_reuse(password)
             if reused:
                 print("it would be a good idea to use another password, password has been used. ")
-                move = input("type Y to use anyway and N to try again")
+                move = input("type U to use anyway and N to try again")
                 move = move.lower()
                 if move == "u":
                     platform = platform.lower()
@@ -69,7 +69,7 @@ def main():
             platform = platform.lower()
             user.set_platform(platform)
             sug = user.password_suggester()
-            reused = user.password_used(sug)
+            reused = user.password_reuse(sug)
             if reused:
                 print("it would be a goo idea to use another password, password has been used. ")
                 move = input("type u to use anyway and p to try againy")
@@ -87,6 +87,7 @@ def main():
             user.store_passwords()
             print("Exiting the program.")
             print("BYEEEE!!! " + user_name)
+            print("SEE you next time.")
             break
         elif choice == "4":
             platform = input("Which platform has the password which you wish to platform: ")
@@ -103,6 +104,7 @@ def main():
             pass
         else:
             print("Invalid choice. Please enter a number between 1 and 4.")
+
 ()
     
 
