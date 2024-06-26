@@ -1,7 +1,7 @@
 import random
 import string
 import re
-from sqldata import store_password, store_platform, get_user_id, retrievePassword
+from sqldata import passwordReuse, store_password, store_platform, get_user_id, retrievePassword
 
 class User:
     def __init__(self, name, connection):
@@ -23,6 +23,8 @@ class User:
         random_string = ''.join(random.choice(char_set) for _ in range(length))
         print(random_string)
         print("password suggested")
+
+
         return random_string
 
     def set_platform(self, platform):
@@ -76,8 +78,6 @@ class User:
             return False
         return True
 
-    def password_used(self, password):
-        return password in self.password_arr
 
     def analyze_strength(self):
         weights = {
@@ -134,12 +134,22 @@ class User:
         user_id = get_user_id(self.connection, self.user_name)
         if user_id is None:
             print("User ID not found for username:", self.user_name)
-            print("you will have to create a new user ")
+            print("you will have to create a new user or put the proper username ")
             return
         password = retrievePassword(self.connection, platform, user_id)
         return password
 
 
-        
 
 
+    def password_reuse(self, apassword):
+        user_id = get_user_id(self.connection, self.user_name)
+        if user_id is None:
+            print("User ID not found for username:", self.user_name)
+            print("you will have to create a new user or put the proper username ")
+            return
+        passwords = passwordReuse(self.connection, user_id)
+        for password in passwords:
+            if password[0] == apassword:
+                return True
+        return False
