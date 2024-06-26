@@ -78,3 +78,21 @@ def retrievePassword(connection, platform, user_id):
         print(f"The error '{e}' occoured ")
 
 
+
+def passwordReuse(connection, user_id):
+    cursor = connection.cursor()
+    try:
+        with connection.cursor() as cursor:
+            query = """
+            SELECT password.password
+            FROM password
+            JOIN user ON password.user_id = user.user_id
+            WHERE user.user_id = %s
+            """
+            cursor.execute(query, (user_id,))
+            passwords = cursor.fetchall()
+            return passwords
+        
+    except Error as e:
+         print(f"The error '{e}' occoured ")
+
