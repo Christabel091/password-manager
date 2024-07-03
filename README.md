@@ -34,7 +34,7 @@ A secure and efficient password manager built with Python and MySQL. This passwo
 3. **Setup MySQL Database**:
 
    - Ensure MAMP is installed and running.
-   - Create a database named `[wuser` and the necessary tables:
+   - Create a database named `pwuser` and the necessary tables:
 
    ```sql
    CREATE TABLE users (
@@ -61,7 +61,7 @@ A secure and efficient password manager built with Python and MySQL. This passwo
 
 1. **Run the Application**:
 
-   ```sh
+   ```bash
    python password_manager.py
    ```
 
