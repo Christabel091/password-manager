@@ -1,7 +1,7 @@
 import random
 import string
 import re
-from sqldata import passwordReuse, store_password, store_platform, get_user_id, retrievePassword
+from sqldata import passwordReuse, store_password, store_platform, get_user_id, retrievePassword, passwordChange
 
 class User:
     def __init__(self, name, connection):
@@ -153,3 +153,12 @@ class User:
             if password[0] == apassword:
                 return True
         return False
+    
+    def password_change(self, platform, new_password):
+        user_id = get_user_id(self.connection, self.user_name)
+        if user_id is None:
+            print("User ID not found for username:", self.user_name)
+            print("You will have to create a new user or put the proper username.")
+            return
+        success = passwordChange(self.connection, user_id, platform, new_password)
+        return success
