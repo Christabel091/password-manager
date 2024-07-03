@@ -5,10 +5,12 @@ unlimited number of passwords done
 retrieve user passwords-done
 Strength Analysis: Analyze the strength of stored passwords. done
 Password Reuse Alerts: Alert users when they reuse passwords across multiple sites.  done
+store passowrds in database MYSQL done
+change passwords done
+
+todo
 Password Sharing: Securely share passwords with trusted contacts. todo
 encrypt passwords  todo
-change passwords todo
 Emergency Access: Provide trusted contacts with emergency access to the account in case of an emergency. todo
-store passowrds in database MYSQL done
 Breach Monitoring: Notify users if their passwords are found in known data breaches. todo
 

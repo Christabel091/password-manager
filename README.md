@@ -19,55 +19,62 @@ A secure and efficient password manager built with Python and MySQL. This passwo
 ## Installation
 
 1. **Clone the Repository**:
-    ```sh
-    git clone https://github.com/yourusername/password-manager.git
-    cd password-manager
-    ```
+
+   ```git
+   git clone https://github.com/yourusername/password-manager.git
+   cd password-manager
+   ```
 
 2. **Install Dependencies**:
-    ```sh
-    pip install mysql-connector-python bcrypt
-    ```
+
+   ```bash
+   pip install mysql-connector-python bcrypt
+   ```
 
 3. **Setup MySQL Database**:
-    - Ensure MAMP is installed and running.
-    - Create a database named `wuser` and the necessary tables:
-    ```sql
-    CREATE TABLE users (
-        id INT AUTO_INCREMENT PRIMARY KEY,
-        username VARCHAR(50) NOT NULL UNIQUE,
-        password_hash VARCHAR(255) NOT NULL,
-        email VARCHAR(100) NOT NULL UNIQUE,
-        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-    );
 
-    CREATE TABLE passwords (
-        id INT AUTO_INCREMENT PRIMARY KEY,
-        user_id INT NOT NULL,
-        site_name VARCHAR(100) NOT NULL,
-        site_url VARCHAR(255),
-        site_username VARCHAR(50),
-        site_password VARCHAR(255) NOT NULL,
-        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-        FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
-    );
-    ```
+   - Ensure MAMP is installed and running.
+   - Create a database named `[wuser` and the necessary tables:
+
+   ```sql
+   CREATE TABLE users (
+       id INT AUTO_INCREMENT PRIMARY KEY,
+       username VARCHAR(50) NOT NULL UNIQUE,
+       password_hash VARCHAR(255) NOT NULL,
+       email VARCHAR(100) NOT NULL UNIQUE,
+       created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+   );
+
+   CREATE TABLE passwords (
+       id INT AUTO_INCREMENT PRIMARY KEY,
+       user_id INT NOT NULL,
+       site_name VARCHAR(100) NOT NULL,
+       site_url VARCHAR(255),
+       site_username VARCHAR(50),
+       site_password VARCHAR(255) NOT NULL,
+       created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+       FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+   );
+   ```
 
 ## Usage
 
 1. **Run the Application**:
-    ```sh
-    python password_manager.py
-    ```
+
+   ```sh
+   python password_manager.py
+   ```
 
 2. **Create a New User**:
-    - Follow the prompts to create a new user account.
+
+   - Follow the prompts to create a new user account.
 
 3. **Login**:
-    - Login with your credentials to access the password manager.
+
+   - Login with your credentials to access the password manager.
 
 4. **Store a New Password**:
-    - After logging in, choose the option to store a new password and follow the prompts.
+   - After logging in, choose the option to store a new password and follow the prompts.
 
 ## Planned Features
 
@@ -93,4 +100,3 @@ This project is licensed under the MIT License. See the [LICENSE](LICENSE) file 
 - [bcrypt](https://github.com/pyca/bcrypt)
 - [mysql-connector-python](https://dev.mysql.com/doc/connector-python/en/)
 - [getpass](https://docs.python.org/3/library/getpass.html)
-
