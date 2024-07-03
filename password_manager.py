@@ -101,9 +101,13 @@ def main():
 
            
         elif choice == "5":
-            pass
-        else:
-            print("Invalid choice. Please enter a number between 1 and 4.")
+            toChange = input(print("Which plafrom's password would you like to change "))
+            update_password = input(print("What is your cuurent password"))
+            success = user.password_change(toChange, update_password)
+            if (success):
+                print("password successfuly changes.")
+            else:
+                print("A problem occoured and password unsuccesfully stored.")
 
 ()
     

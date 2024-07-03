@@ -93,6 +93,46 @@ def passwordReuse(connection, user_id):
             passwords = cursor.fetchall()
             return passwords
         
+        
     except Error as e:
          print(f"The error '{e}' occoured ")
 
+def passwordChange(connection, user_id, platform, new_password):
+    cursor = connection.cursor()
+    try:
+        # Start a transaction
+        connection.start_transaction()
+        
+        # Retrieve the password_id from the platforms table
+        query = """
+        SELECT password_id
+        FROM platforms
+        WHERE user_id = %s AND platform = %s
+        """
+        cursor.execute(query, (user_id, platform))
+        result = cursor.fetchone()
+        
+        if result:        
+            password_id = result[0]
+            
+            
+            update_query = """
+            UPDATE passwords
+            SET password = %s
+            WHERE password_id = %s
+            """
+            cursor.execute(update_query, (new_password, password_id))
+            connection.commit()
+            return True
+        else:
+            connection.rollback()
+            print("No matching password found for the specified platform.")
+            print("You may have to create a fresh password for the platform ot try sgain.")
+            return False
+    except Error as e:
+        # Error handling
+        connection.rollback()
+        print(f"The error '{e}' occurred")
+        return False
+    finally:
+        cursor.close()
