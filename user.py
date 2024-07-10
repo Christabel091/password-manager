@@ -2,7 +2,7 @@ import random
 import string
 import re
 from sqldata import passwordReuse, store_password, store_platform, get_user_id, retrievePassword, passwordChange
-
+from encrypy import encrypt_vigenere, generate_vigenere_key, decrypt_vigenere
 class User:
     def __init__(self, name, connection):
         self.user_name = name
@@ -11,9 +11,11 @@ class User:
         self.pform_arr = []
         self.pform = None
         self.connection = connection
+        self.encryption_key = "KEY"  # Use a strong, unique key for each user/application
 
     def set_password(self, password):
-        self.user_password = password
+        encrypted_password = encrypt_vigenere(password, self.encryption_key)
+        self.user_password = encrypted_password
         self.password_arr.append(self.user_password)
         print(f"Password set for {self.user_name}")
 
@@ -23,8 +25,6 @@ class User:
         random_string = ''.join(random.choice(char_set) for _ in range(length))
         print(random_string)
         print("password suggested")
-
-
         return random_string
 
     def set_platform(self, platform):
@@ -77,7 +77,6 @@ class User:
                 print("Password must contain at least one of the following special characters: !, #, $, &")
             return False
         return True
-
 
     def analyze_strength(self):
         weights = {
@@ -136,11 +135,11 @@ class User:
             print("User ID not found for username:", self.user_name)
             print("you will have to create a new user or put the proper username ")
             return
-        password = retrievePassword(self.connection, platform, user_id)
-        return password
-
-
-
+        encrypted_password = retrievePassword(self.connection, platform, user_id)
+        if encrypted_password:
+            decrypted_password = decrypt_vigenere(encrypted_password, self.encryption_key)
+            return decrypted_password
+        return None
 
     def password_reuse(self, apassword):
         user_id = get_user_id(self.connection, self.user_name)
@@ -150,15 +149,17 @@ class User:
             return
         passwords = passwordReuse(self.connection, user_id)
         for password in passwords:
-            if password[0] == apassword:
+            decrypted_password = decrypt_vigenere(password[0], self.encryption_key)
+            if decrypted_password == apassword:
                 return True
         return False
-    
+
     def password_change(self, platform, new_password):
         user_id = get_user_id(self.connection, self.user_name)
         if user_id is None:
             print("User ID not found for username:", self.user_name)
             print("You will have to create a new user or put the proper username.")
             return
-        success = passwordChange(self.connection, user_id, platform, new_password)
+        encrypted_password = encrypt_vigenere(new_password, self.encryption_key)
+        success = passwordChange(self.connection, user_id, platform, encrypted_password)
         return success
