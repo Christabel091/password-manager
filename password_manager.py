@@ -28,8 +28,8 @@ def main():
         authenticate_user(connection, username, password)
 
     print("You have successfully logged in")
-    print("\n Welcome again " + user_name)
-    print(user_name + "So, What can we do for you today!!")
+    print("\nWelcome again " + user_name)
+    print("So, ", user_name + " What can we do for you today!!\n")
     while True:
         print("1. Save Password")
         print("2. Create or Suggest Password")
@@ -38,10 +38,11 @@ def main():
         print("5, change password")
         print("6. Exit")
         
-        choice = input("Enter your choice (1-4): ")
+        choice = input("Enter your choice (1-6): ")
         
         if choice == '1':
             platform = input("What is the platform for the password: ")
+            platform = platform.lower()
             password = input("Enter the password to save: ")
             pw_valid = user.validate_pw(password)
             if not pw_valid:
@@ -83,6 +84,8 @@ def main():
             print("Password suggested:", sug)
         elif choice == '3':
             user.analyze_strength()
+            #fix the function to also analyze the strength of passwords in the database
+            print("analyzed")
         elif choice == '6':
             user.store_passwords()
             print("Exiting the program.")
@@ -96,10 +99,8 @@ def main():
             if password:
                 print ("Your password is " + password)
             else:
-                print("password for the " + platform + "plaform was not found" )
-                print("Either you don not have a passowrd for the above platform or you spelled it wrong, can you double check and try again.")
-
-           
+                print("password for the " + platform + " plaform was not found" )
+                print("Either you don not have a passowrd for the above platform or you spelled it wrong, can you double check and try again.")           
         elif choice == "5":
             toChange = input(print("Which plafrom's password would you like to change "))
             update_password = input(print("What is your cuurent password"))

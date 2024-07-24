@@ -1,3 +1,5 @@
+#Can be swt=irched to ceaser cipher encryption to make it simple or basic.
+
 def generate_vigenere_key(text, keyword):
     key = list(keyword)
     if len(text) == len(key):
@@ -7,6 +9,7 @@ def generate_vigenere_key(text, keyword):
             key.append(key[i % len(key)])
     return "".join(key)
 
+#encrypts the passwords for the users.
 def encrypt_vigenere(text, keyword):
     key = generate_vigenere_key(text, keyword)
     encrypted_text = []
@@ -26,7 +29,7 @@ def encrypt_vigenere(text, keyword):
             encrypted_text.append(text[i])
     return "".join(encrypted_text)
 
-
+#decrypts the necceasary passwords for users to use after ecryption.
 def decrypt_vigenere(text, keyword):
     key = generate_vigenere_key(text, keyword)
     decrypted_text = []

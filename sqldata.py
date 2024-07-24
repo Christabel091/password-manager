@@ -59,35 +59,31 @@ def store_platform(connection, user_id, password_id, platform):
     try:
         cursor.execute("INSERT INTO platforms (user_id, password_id, platform) VALUES (%s, %s, %s)", (user_id, password_id, platform))
         connection.commit()
-        print("Platform stored successfully")
     except Error as e:
         print(f"The error '{e}' occurred")
 
 def retrievePassword(connection, platform, user_id):
-    cursor = connection.cursor()
+    cursor = connection.cursor(dictionary=True)  # a dictionary cursor
     try:
-        cursor.execute("SELECT password_id FROM platforms WHERE platform = %s AND user_id = %s" , (platform, user_id) )
+        cursor.execute("SELECT password_id FROM platforms WHERE platform = %s AND user_id = %s", (platform, user_id))
         id_result = cursor.fetchone()
         if id_result:
-            password_id =  id_result["password_id"]
+            password_id = id_result["password_id"]
             cursor.execute("SELECT password FROM passwords WHERE password_id = %s", (password_id,))
             password_result = cursor.fetchone()
             return password_result['password'] if password_result else None
-        return None
     except Error as e:
-        print(f"The error '{e}' occoured ")
-
-
+        print(f"The error '{e}' occurred")
 
 def passwordReuse(connection, user_id):
     cursor = connection.cursor()
     try:
         with connection.cursor() as cursor:
             query = """
-            SELECT password.password
-            FROM password
-            JOIN user ON password.user_id = user.user_id
-            WHERE user.user_id = %s
+            SELECT passwords.password
+            FROM passwords
+            JOIN users ON passwords.user_id = users.user_id
+            WHERE users.user_id = %s
             """
             cursor.execute(query, (user_id,))
             passwords = cursor.fetchall()
